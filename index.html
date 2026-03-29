@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinícius OffSec | Portfólio</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div id="crosshair"></div>
+
+  <div id="transition-overlay" aria-hidden="true">
+    <div class="transition-bg"></div>
+    <div class="transition-noise"></div>
+    <div class="transition-scanlines"></div>
+    <div class="transition-bars">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <h2>SYSTEM_RELOAD</h2>
+  </div>
+
+  <header>
+    <nav>
+      <span class="logo">Vinícius</span>
+
+      <div class="language-switcher header-language-switcher">
+        <button class="lang-btn active-lang clickable" data-lang="pt">PT</button>
+        <span class="lang-separator">|</span>
+        <button class="lang-btn clickable" data-lang="en">EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="hero-panel">
+        <div class="hero-left">
+          <p class="hero-tag" id="hero-tag-text">VULNERABILIDADE ENCONTRADA...</p>
+
+          <h1 class="glitch-title">
+            <span class="name-white hologram-text" data-text="VINÍCIUS">VINÍCIUS</span>
+            <span class="name-green hologram-text" data-text="OFFSEC">OFFSEC</span>
+          </h1>
+
+          <div class="hero-line"></div>
+
+          <p class="hero-status" id="hero-status-text">Disponível para oportunidades</p>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-top-right">
+            <div class="hero-system-block">
+              <p class="hero-system-info">SYSTEM_ID: V-SEC-01</p>
+              <p class="hero-system-info">KERNEL: 5.14.0-kali</p>
+            </div>
+
+          </div>
+
+          <div class="hero-socials">
+            <a
+              href="https://github.com/viniciusdrt"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-box clickable"
+            >
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/viniciusdrt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-box clickable"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="terminal-preview">
+      <div class="terminal-grid">
+        <aside class="side-panel">
+          <div class="panel-box menu-box">
+            <div class="panel-header">MENU_V2.0</div>
+
+            <button class="panel-link clickable main-tab active-link" data-main="root">ROOT_ACCESS</button>
+            <button class="panel-link clickable main-tab" data-main="cv">CV</button>
+            <button class="panel-link clickable main-tab" data-main="repositories">REPOSITORIES</button>
+            <button class="panel-link clickable main-tab" data-main="contact">CONTACT_UPLINK</button>
+          </div>
+
+          <div class="panel-box stats-box">
+            <div class="panel-header">SERVER_STATS</div>
+            <p>Visitors: 00000008</p>
+            <p>You are visitor: #06</p>
+            <p>Server time: 19:13 GMT</p>
+            <p>Status: ONLINE</p>
+          </div>
+        </aside>
+
+        <div class="terminal-area">
+          <div class="terminal-box main-terminal-box">
+            <div class="quote-header" id="terminal-exe-label">&gt;_ EXECUTING_ROOT.EXE</div>
+
+            <div class="terminal-main-layout cv-closed">
+              <div class="terminal-submenu hidden" id="cv-submenu">
+                <button class="submenu-item clickable active-submenu cv-tab" data-cv="profile">PROFILE</button>
+                <button class="submenu-item clickable cv-tab" data-cv="skills">SKILLS</button>
+                <button class="submenu-item clickable cv-tab" data-cv="arsenal">ARSENAL</button>
+                <button class="submenu-item clickable cv-tab" data-cv="experience">EXPERIENCE</button>
+                <button class="submenu-item clickable cv-tab" data-cv="academic">ACADEMIC</button>
+              </div>
+
+              <div class="terminal-main-content">
+                <div class="main-content-section active-content" id="main-root">
+                  <h3 class="content-title" id="root-title">ROOT_ACCESS</h3>
+                  <div class="content-box">
+                    <p id="root-text-1">
+                      Bem-vindo ao meu portfólio OffSec. Aqui você encontra meu perfil,
+                      habilidades técnicas, projetos e formas de contato em uma interface
+                      inspirada em terminal cyber.
+                    </p>
+                    <p id="root-text-2">
+                      Meu foco está em segurança ofensiva, pentest web, automação
+                      e evolução prática constante na área de cibersegurança.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="main-content-section" id="main-cv">
+                  <div class="cv-content-section active-content" id="cv-profile">
+                    <h3 class="content-title" id="cv-profile-title">PROFESSIONAL_SUMMARY</h3>
+                    <div class="content-box">
+                      <p id="cv-profile-text-1">
+                        Estudante de Ciência da Computação com foco em segurança ofensiva,
+                        pentest web, automação e análise de vulnerabilidades.
+                      </p>
+                      <p id="cv-profile-text-2">
+                        Buscando evoluir tecnicamente através de projetos práticos,
+                        laboratórios, estudos constantes e desenvolvimento de soluções
+                        com foco em segurança.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="cv-content-section" id="cv-skills">
+                    <h3 class="content-title" id="cv-skills-title">TECHNICAL_CAPABILITIES</h3>
+                    <div class="skills-grid-terminal">
+                      <div class="skill-card" id="skill-1">Linux</div>
+                      <div class="skill-card" id="skill-2">Python</div>
+                      <div class="skill-card" id="skill-3">Java</div>
+                      <div class="skill-card" id="skill-4">Burp Suite</div>
+                      <div class="skill-card" id="skill-5">Nmap</div>
+                      <div class="skill-card" id="skill-6">OWASP Top 10</div>
+                      <div class="skill-card" id="skill-7">Redes</div>
+                      <div class="skill-card" id="skill-8">Git/GitHub</div>
+                    </div>
+                  </div>
+
+                  <div class="cv-content-section" id="cv-arsenal">
+                    <h3 class="content-title" id="cv-arsenal-title">CYBER_SECURITY_ARSENAL</h3>
+                    <div class="skills-grid-terminal">
+                      <div class="skill-card">Burp Suite</div>
+                      <div class="skill-card">Nmap</div>
+                      <div class="skill-card">Wireshark</div>
+                      <div class="skill-card">Gobuster</div>
+                      <div class="skill-card">ffuf</div>
+                      <div class="skill-card">Linux CLI</div>
+                    </div>
+                  </div>
+
+                  <div class="cv-content-section" id="cv-experience">
+                    <h3 class="content-title" id="cv-experience-title">WORK_HISTORY</h3>
+                    <div class="content-box">
+                      <p id="cv-experience-text-1">
+                        No momento, estou construindo base prática com estudos,
+                        laboratórios, projetos pessoais e desenvolvimento técnico contínuo.
+                      </p>
+                      <p id="cv-experience-text-2">
+                        Meu foco atual é fortalecer portfólio, repertório técnico e
+                        experiência aplicável em segurança e infraestrutura.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="cv-content-section" id="cv-academic">
+                    <h3 class="content-title" id="cv-academic-title">EDUCATION</h3>
+                    <div class="content-box">
+                      <p id="cv-academic-text-1">Ciência da Computação — UniCEUB</p>
+                      <p id="cv-academic-text-2">Estudos voltados para segurança, programação, redes e infraestrutura.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="main-content-section" id="main-repositories">
+                  <h3 class="content-title" id="repositories-title">PROJECT_REPOSITORIES</h3>
+                  <div class="projects-grid-terminal">
+                    <a
+                      href="https://github.com/viniciusdrt/java"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-terminal-card clickable"
+                    >
+                      <h4 id="repo-java-title">Estudos Java</h4>
+                      <p id="repo-java-text">POO, sintaxe, lógica e fundamentos backend.</p>
+                    </a>
+
+                    <a
+                      href="https://github.com/viniciusdrt/python"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-terminal-card clickable"
+                    >
+                      <h4 id="repo-python-title">Estudos Python</h4>
+                      <p id="repo-python-text">Lógica, automação e base para ferramentas de segurança.</p>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="main-content-section" id="main-contact">
+                  <h3 class="content-title" id="contact-title">SECURE_COMMUNICATION_UPLINK</h3>
+                  <div class="contact-grid-terminal">
+                    <a href="mailto:eu.viniasduarte@gmail.com" class="contact-card clickable">
+                      <h4 id="contact-email-title">EMAIL_RELAY</h4>
+                      <p>eu.viniasduarte@gmail.com</p>
+                    </a>
+
+                    <a
+                      href="https://github.com/viniciusdrt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="contact-card clickable"
+                    >
+                      <h4>GITHUB</h4>
+                      <p>github.com/viniciusdrt</p>
+                    </a>
+
+                    <a
+                      href="https://www.linkedin.com/in/viniciusdrt/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="contact-card clickable"
+                    >
+                      <h4>LINKEDIN</h4>
+                      <p>linkedin.com/in/viniciusdrt</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
