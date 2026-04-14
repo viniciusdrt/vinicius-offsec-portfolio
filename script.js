@@ -215,8 +215,8 @@ const translations = {
     repoJavaText: "POO, sintaxe, lógica e fundamentos backend.",
     repoPythonTitle: "Estudos Python",
     repoPythonText: "Lógica, automação e base para ferramentas de segurança.",
-    repoCamscanTitle: "CamScan Pitch",
-    repoCamscanText: "Slide no Canva com o pitch do projeto CamScan.",
+    repoCamscanTitle: "camscan",
+    repoCamscanText: "Scanner automatizado de vulnerabilidades em câmeras IP de redes locais.",
     repoMalwareTitle: "malware-detection-tool",
     repoMalwareText: "Projeto no GitHub para detecção de malware.",
 
@@ -255,8 +255,8 @@ const translations = {
     repoJavaText: "OOP, syntax, logic, and backend fundamentals.",
     repoPythonTitle: "Python Studies",
     repoPythonText: "Logic, automation, and a foundation for security-related tools.",
-    repoCamscanTitle: "CamScan Pitch",
-    repoCamscanText: "Canva slide deck with the CamScan project pitch.",
+    repoCamscanTitle: "camscan",
+    repoCamscanText: "Automated vulnerability scanner for IP cameras on local area networks.",
     repoMalwareTitle: "malware-detection-tool",
     repoMalwareText: "GitHub project for malware detection.",
 
