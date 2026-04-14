@@ -215,6 +215,10 @@ const translations = {
     repoJavaText: "POO, sintaxe, lógica e fundamentos backend.",
     repoPythonTitle: "Estudos Python",
     repoPythonText: "Lógica, automação e base para ferramentas de segurança.",
+    repoCamscanTitle: "CamScan Pitch",
+    repoCamscanText: "Slide no Canva com o pitch do projeto CamScan.",
+    repoMalwareTitle: "malware-detection-tool",
+    repoMalwareText: "Projeto no GitHub para detecção de malware.",
 
     contactTitle: "SECURE_COMMUNICATION_UPLINK",
     contactEmailTitle: "EMAIL_RELAY",
@@ -251,6 +255,10 @@ const translations = {
     repoJavaText: "OOP, syntax, logic, and backend fundamentals.",
     repoPythonTitle: "Python Studies",
     repoPythonText: "Logic, automation, and a foundation for security-related tools.",
+    repoCamscanTitle: "CamScan Pitch",
+    repoCamscanText: "Canva slide deck with the CamScan project pitch.",
+    repoMalwareTitle: "malware-detection-tool",
+    repoMalwareText: "GitHub project for malware detection.",
 
     contactTitle: "SECURE_COMMUNICATION_UPLINK",
     contactEmailTitle: "EMAIL_RELAY",
@@ -288,7 +296,11 @@ function setLanguage(lang) {
     "repo-java-text": translations[lang].repoJavaText,
     "repo-python-title": translations[lang].repoPythonTitle,
     "repo-python-text": translations[lang].repoPythonText,
-
+    "repo-camscan-title": translations[lang].repoCamscanTitle,
+    "repo-camscan-text": translations[lang].repoCamscanText,
+    "repo-malware-title": translations[lang].repoMalwareTitle,
+    "repo-malware-text": translations[lang].repoMalwareText,
+    
     "contact-title": translations[lang].contactTitle,
     "contact-email-title": translations[lang].contactEmailTitle,
     "skill-7": translations[lang].skill7
