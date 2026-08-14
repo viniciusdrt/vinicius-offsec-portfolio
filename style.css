@@ -525,6 +525,46 @@ section {
   margin-top: 16px;
 }
 
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.experience-header h4 {
+  color: #e8ffe9;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.experience-header #cv-experience-company,
+.experience-date {
+  color: var(--green-soft);
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.experience-date {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.experience-list {
+  list-style: square;
+  padding-left: 24px;
+}
+
+.experience-list li {
+  line-height: 1.45;
+  padding-left: 4px;
+}
+
+.experience-list li + li {
+  margin-top: 9px;
+}
+
 .skills-grid-terminal {
   display: grid;
   grid-template-columns: repeat(2, minmax(140px, 1fr));
@@ -814,6 +854,15 @@ section {
   .hero-top-right {
   align-items: flex-start;
 }
+
+  .experience-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .experience-date {
+    text-align: left;
+  }
 }
 
 .hero-top-right {
