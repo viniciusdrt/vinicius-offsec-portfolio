@@ -192,19 +192,26 @@ const translations = {
 
     rootTitle: "ROOT_ACCESS",
     rootText1: "Bem-vindo ao meu portfólio OffSec. Aqui você encontra meu perfil, habilidades técnicas, projetos e formas de contato em uma interface inspirada em terminal cyber.",
-    rootText2: "Meu foco está em segurança ofensiva, pentest web, automação e evolução prática constante na área de cibersegurança.",
+    rootText2: "Atuo com monitoramento de redes e infraestrutura em NOC e continuo me desenvolvendo em segurança ofensiva, análise de vulnerabilidades e automação.",
 
     cvProfileTitle: "PROFESSIONAL_SUMMARY",
-    cvProfileText1: "Estudante de Ciência da Computação com foco em segurança ofensiva, pentest web, automação e análise de vulnerabilidades.",
-    cvProfileText2: "Buscando evoluir tecnicamente através de projetos práticos, laboratórios, estudos constantes e desenvolvimento de soluções com foco em segurança.",
+    cvProfileText1: "Estudante de Ciência da Computação e estagiário em Monitoramento de Redes (NOC) na IPV7.",
+    cvProfileText2: "Experiência prática com monitoramento, triagem de incidentes, infraestrutura e troubleshooting, aliada a estudos em segurança ofensiva, análise de vulnerabilidades e automação.",
 
     cvSkillsTitle: "TECHNICAL_CAPABILITIES",
 
     cvArsenalTitle: "CYBER_SECURITY_ARSENAL",
 
     cvExperienceTitle: "WORK_HISTORY",
-    cvExperienceText1: "No momento, estou construindo base prática com estudos, laboratórios, projetos pessoais e desenvolvimento técnico contínuo.",
-    cvExperienceText2: "Meu foco atual é fortalecer portfólio, repertório técnico e experiência aplicável em segurança e infraestrutura.",
+    cvExperienceRole: "Estagiário em Monitoramento de Redes (NOC)",
+    cvExperienceDate: "JUN 2026 — ATUAL",
+    cvExperienceItems: [
+      "Monitoramento de equipamentos e serviços de rede, incluindo roteadores, switches, OLTs e servidores.",
+      "Identificação e triagem de alarmes e incidentes de infraestrutura.",
+      "Testes de conectividade e troubleshooting inicial utilizando ping e traceroute.",
+      "Registro e acompanhamento de chamados operacionais.",
+      "Apoio às rotinas técnicas do NOC e colaboração com o time de infraestrutura."
+    ],
 
     cvAcademicTitle: "EDUCATION",
     cvAcademicText1: "Ciência da Computação — UniCEUB",
@@ -223,7 +230,7 @@ const translations = {
     contactTitle: "SECURE_COMMUNICATION_UPLINK",
     contactEmailTitle: "EMAIL_RELAY",
 
-    skill7: "Redes"
+    skill8: "Redes"
   },
 
   en: {
@@ -232,19 +239,26 @@ const translations = {
 
     rootTitle: "ROOT_ACCESS",
     rootText1: "Welcome to my OffSec portfolio. Here you will find my profile, technical skills, projects, and contact channels in an interface inspired by a cyber terminal.",
-    rootText2: "My focus is offensive security, web pentesting, automation, and continuous practical growth in cybersecurity.",
+    rootText2: "I work with network and infrastructure monitoring in a NOC while continuing to develop my skills in offensive security, vulnerability analysis, and automation.",
 
     cvProfileTitle: "PROFESSIONAL_SUMMARY",
-    cvProfileText1: "Computer Science student focused on offensive security, web pentesting, automation, and vulnerability analysis.",
-    cvProfileText2: "Currently improving through practical projects, labs, continuous study, and solution building with a security-oriented mindset.",
+    cvProfileText1: "Computer Science student and Network Monitoring Intern (NOC) at IPV7.",
+    cvProfileText2: "Hands-on experience in monitoring, incident triage, infrastructure, and troubleshooting, combined with studies in offensive security, vulnerability analysis, and automation.",
 
     cvSkillsTitle: "TECHNICAL_CAPABILITIES",
 
     cvArsenalTitle: "CYBER_SECURITY_ARSENAL",
 
     cvExperienceTitle: "WORK_HISTORY",
-    cvExperienceText1: "At the moment, I am building practical experience through studies, labs, personal projects, and continuous technical development.",
-    cvExperienceText2: "My current goal is to strengthen my portfolio, technical background, and real-world skills applicable to security and infrastructure.",
+    cvExperienceRole: "Network Monitoring Intern (NOC)",
+    cvExperienceDate: "JUN 2026 — PRESENT",
+    cvExperienceItems: [
+      "Monitoring network equipment and services, including routers, switches, OLTs, and servers.",
+      "Identifying and triaging infrastructure alarms and incidents.",
+      "Performing connectivity tests and initial troubleshooting using ping and traceroute.",
+      "Logging and following up on operational tickets.",
+      "Supporting NOC technical routines and collaborating with the infrastructure team."
+    ],
 
     cvAcademicTitle: "EDUCATION",
     cvAcademicText1: "Computer Science — UniCEUB",
@@ -263,7 +277,7 @@ const translations = {
     contactTitle: "SECURE_COMMUNICATION_UPLINK",
     contactEmailTitle: "EMAIL_RELAY",
 
-    skill7: "Networking"
+    skill8: "Networking"
   }
 };
 
@@ -284,8 +298,8 @@ function setLanguage(lang) {
     "cv-arsenal-title": translations[lang].cvArsenalTitle,
 
     "cv-experience-title": translations[lang].cvExperienceTitle,
-    "cv-experience-text-1": translations[lang].cvExperienceText1,
-    "cv-experience-text-2": translations[lang].cvExperienceText2,
+    "cv-experience-role": translations[lang].cvExperienceRole,
+    "cv-experience-date": translations[lang].cvExperienceDate,
 
     "cv-academic-title": translations[lang].cvAcademicTitle,
     "cv-academic-text-1": translations[lang].cvAcademicText1,
@@ -303,7 +317,7 @@ function setLanguage(lang) {
     
     "contact-title": translations[lang].contactTitle,
     "contact-email-title": translations[lang].contactEmailTitle,
-    "skill-7": translations[lang].skill7
+    "skill-8": translations[lang].skill8
   };
 
   Object.entries(map).forEach(([id, text]) => {
@@ -312,6 +326,17 @@ function setLanguage(lang) {
       element.textContent = text;
     }
   });
+
+  const experienceList = document.getElementById("cv-experience-list");
+  if (experienceList) {
+    experienceList.replaceChildren(
+      ...translations[lang].cvExperienceItems.map((item) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = item;
+        return listItem;
+      })
+    );
+  }
 
   document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
 }
