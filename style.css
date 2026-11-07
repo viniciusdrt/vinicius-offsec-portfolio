@@ -358,28 +358,17 @@ html[data-motion="off"] .icon-play {
 .glitch-title {
   display: grid;
   font-family: var(--font-display);
-  font-weight: 800;
   font-size: min(22.5cqi, 16rem);
   font-weight: 400;
   line-height: 0.92;
   letter-spacing: 0;
 }
 
-.name-white,
-.name-green {
+.name-white {
   position: relative;
   display: block;
   width: fit-content;
-}
-
-.name-white {
   color: var(--ink);
-}
-
-.name-green {
-  color: var(--phosphor);
-  justify-self: end;
-  text-shadow: 0 4px 48px rgba(0, 255, 65, 0.45);
 }
 
 .hologram-text::before,
