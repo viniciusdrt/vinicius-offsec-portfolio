@@ -39,7 +39,7 @@
 
   /* ---------- Atlas de glifos: desenhar uma vez, copiar sempre ---------- */
   const GLYPHS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const RAIN_FONT = '"Martian Mono", "MS Gothic", "Yu Gothic", "Noto Sans Mono CJK JP", monospace';
+  const RAIN_FONT = '"VT323", "MS Gothic", "Yu Gothic", "Noto Sans Mono CJK JP", monospace';
 
   function createAtlas(cell, colors, scale = 1) {
     const size = Math.ceil(cell * scale);
@@ -48,7 +48,7 @@
     atlas.height = colors.length * size;
 
     const ctx = atlas.getContext("2d");
-    ctx.font = `500 ${Math.floor(size * 0.8)}px ${RAIN_FONT}`;
+    ctx.font = `400 ${Math.floor(size * 0.95)}px ${RAIN_FONT}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
@@ -271,7 +271,7 @@
       const style = window.getComputedStyle(span);
       fontSize = parseFloat(style.fontSize);
 
-      maskCtx.font = `${style.fontWeight} ${style.fontSize} "Martian Mono", monospace`;
+      maskCtx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       if ("letterSpacing" in maskCtx) {
         maskCtx.letterSpacing = style.letterSpacing;
       }
@@ -284,7 +284,7 @@
       maskCtx.fillText(span.textContent, rect.left - box.left, baseline);
     });
 
-    const cell = Math.max(5, Math.round(fontSize / 19));
+    const cell = Math.max(5, Math.round(fontSize / 26));
     const pixels = maskCtx.getImageData(0, 0, width, height).data;
     const columns = [];
     const rowCount = Math.ceil(height / cell);
@@ -430,29 +430,78 @@
     }
     root.classList.add("has-crosshair");
 
+    /* Tempo que a mira segura ao sair de um item: cobre os vãos entre botões vizinhos. */
+    const RELEASE_MS = 70;
     let frame = 0;
-    let pointerX = 0;
-    let pointerY = 0;
+    let releaseTimer = 0;
+    let pointerX = -100;
+    let pointerY = -100;
+    let inside = false;
+    let on = false;
 
-    window.addEventListener("pointermove", (event) => {
+    function setOn(next) {
+      if (next === on) {
+        return;
+      }
+      on = next;
+      crosshair.classList.toggle("visible", on);
+      crosshair.classList.toggle("active", on);
+      /* A seta do sistema só some enquanto a mira está na tela. */
+      root.classList.toggle("crosshair-on", on);
+    }
+
+    /* O estado vem do elemento que está de fato sob o ponteiro, inclusive ao rolar a página. */
+    function update() {
+      frame = 0;
+      crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
+
+      const target = inside ? document.elementFromPoint(pointerX, pointerY) : null;
+      const over = Boolean(target && target.closest(".clickable"));
+
+      if (over) {
+        window.clearTimeout(releaseTimer);
+        releaseTimer = 0;
+        setOn(true);
+      } else if (on && !releaseTimer) {
+        releaseTimer = window.setTimeout(() => {
+          releaseTimer = 0;
+          setOn(false);
+        }, inside ? RELEASE_MS : 0);
+      }
+    }
+
+    function schedule() {
+      if (!frame) {
+        frame = window.requestAnimationFrame(update);
+      }
+    }
+
+    document.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse" && event.pointerType !== "pen") {
+        return;
+      }
       pointerX = event.clientX;
       pointerY = event.clientY;
-      if (!frame) {
-        frame = window.requestAnimationFrame(() => {
-          crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
-          frame = 0;
-        });
+      inside = true;
+      schedule();
+    }, { passive: true });
+
+    window.addEventListener("scroll", () => {
+      if (inside) {
+        schedule();
       }
     }, { passive: true });
 
-    document.addEventListener("pointerover", (event) => {
-      const over = Boolean(event.target.closest && event.target.closest(".clickable"));
-      crosshair.classList.toggle("visible", over);
-      crosshair.classList.toggle("active", over);
+    document.addEventListener("pointerout", (event) => {
+      if (!event.relatedTarget) {
+        inside = false;
+        schedule();
+      }
     }, { passive: true });
 
-    root.addEventListener("pointerleave", () => {
-      crosshair.classList.remove("visible", "active");
+    window.addEventListener("blur", () => {
+      inside = false;
+      schedule();
     });
   }
 
