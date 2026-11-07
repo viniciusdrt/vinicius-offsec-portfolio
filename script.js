@@ -432,14 +432,15 @@
 
     /* Tempo que a mira segura ao sair de um item: cobre os vãos entre botões vizinhos. */
     const RELEASE_MS = 70;
-    let frame = 0;
     let releaseTimer = 0;
-    let pointerX = -100;
-    let pointerY = -100;
+    let pointerX = 0;
+    let pointerY = 0;
     let inside = false;
     let on = false;
 
     function setOn(next) {
+      window.clearTimeout(releaseTimer);
+      releaseTimer = 0;
       if (next === on) {
         return;
       }
@@ -450,32 +451,21 @@
       root.classList.toggle("crosshair-on", on);
     }
 
-    /* O estado vem do elemento que está de fato sob o ponteiro, inclusive ao rolar a página. */
-    function update() {
-      frame = 0;
-      crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
+    function release(delay) {
+      if (on && !releaseTimer) {
+        releaseTimer = window.setTimeout(() => setOn(false), delay);
+      }
+    }
 
-      const target = inside ? document.elementFromPoint(pointerX, pointerY) : null;
-      const over = Boolean(target && target.closest(".clickable"));
-
-      if (over) {
-        window.clearTimeout(releaseTimer);
-        releaseTimer = 0;
+    function refresh(target) {
+      if (target && target.closest && target.closest(".clickable")) {
         setOn(true);
-      } else if (on && !releaseTimer) {
-        releaseTimer = window.setTimeout(() => {
-          releaseTimer = 0;
-          setOn(false);
-        }, inside ? RELEASE_MS : 0);
+      } else {
+        release(RELEASE_MS);
       }
     }
 
-    function schedule() {
-      if (!frame) {
-        frame = window.requestAnimationFrame(update);
-      }
-    }
-
+    /* Posição escrita no mesmo evento: a mira nunca fica atrás do ponteiro. */
     document.addEventListener("pointermove", (event) => {
       if (event.pointerType !== "mouse" && event.pointerType !== "pen") {
         return;
@@ -483,25 +473,27 @@
       pointerX = event.clientX;
       pointerY = event.clientY;
       inside = true;
-      schedule();
+      crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
+      refresh(event.target);
     }, { passive: true });
 
+    /* Rolando com o mouse parado, o que está sob o ponteiro muda. */
     window.addEventListener("scroll", () => {
       if (inside) {
-        schedule();
+        refresh(document.elementFromPoint(pointerX, pointerY));
       }
     }, { passive: true });
 
     document.addEventListener("pointerout", (event) => {
       if (!event.relatedTarget) {
         inside = false;
-        schedule();
+        release(0);
       }
     }, { passive: true });
 
     window.addEventListener("blur", () => {
       inside = false;
-      schedule();
+      release(0);
     });
   }
 
