@@ -430,29 +430,78 @@
     }
     root.classList.add("has-crosshair");
 
+    /* Tempo que a mira segura ao sair de um item: cobre os vãos entre botões vizinhos. */
+    const RELEASE_MS = 70;
     let frame = 0;
-    let pointerX = 0;
-    let pointerY = 0;
+    let releaseTimer = 0;
+    let pointerX = -100;
+    let pointerY = -100;
+    let inside = false;
+    let on = false;
 
-    window.addEventListener("pointermove", (event) => {
+    function setOn(next) {
+      if (next === on) {
+        return;
+      }
+      on = next;
+      crosshair.classList.toggle("visible", on);
+      crosshair.classList.toggle("active", on);
+      /* A seta do sistema só some enquanto a mira está na tela. */
+      root.classList.toggle("crosshair-on", on);
+    }
+
+    /* O estado vem do elemento que está de fato sob o ponteiro, inclusive ao rolar a página. */
+    function update() {
+      frame = 0;
+      crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
+
+      const target = inside ? document.elementFromPoint(pointerX, pointerY) : null;
+      const over = Boolean(target && target.closest(".clickable"));
+
+      if (over) {
+        window.clearTimeout(releaseTimer);
+        releaseTimer = 0;
+        setOn(true);
+      } else if (on && !releaseTimer) {
+        releaseTimer = window.setTimeout(() => {
+          releaseTimer = 0;
+          setOn(false);
+        }, inside ? RELEASE_MS : 0);
+      }
+    }
+
+    function schedule() {
+      if (!frame) {
+        frame = window.requestAnimationFrame(update);
+      }
+    }
+
+    document.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse" && event.pointerType !== "pen") {
+        return;
+      }
       pointerX = event.clientX;
       pointerY = event.clientY;
-      if (!frame) {
-        frame = window.requestAnimationFrame(() => {
-          crosshair.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
-          frame = 0;
-        });
+      inside = true;
+      schedule();
+    }, { passive: true });
+
+    window.addEventListener("scroll", () => {
+      if (inside) {
+        schedule();
       }
     }, { passive: true });
 
-    document.addEventListener("pointerover", (event) => {
-      const over = Boolean(event.target.closest && event.target.closest(".clickable"));
-      crosshair.classList.toggle("visible", over);
-      crosshair.classList.toggle("active", over);
+    document.addEventListener("pointerout", (event) => {
+      if (!event.relatedTarget) {
+        inside = false;
+        schedule();
+      }
     }, { passive: true });
 
-    root.addEventListener("pointerleave", () => {
-      crosshair.classList.remove("visible", "active");
+    window.addEventListener("blur", () => {
+      inside = false;
+      schedule();
     });
   }
 

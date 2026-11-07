@@ -1261,7 +1261,7 @@ html.js[data-motion="on"] .session.is-live {
   pointer-events: none;
   z-index: 90;
   opacity: 0;
-  transition: opacity 0.15s ease, scale 0.15s ease;
+  transition: opacity 0.12s ease, scale 0.15s ease;
   will-change: transform;
 }
 
@@ -1285,16 +1285,19 @@ html.js[data-motion="on"] .session.is-live {
   height: 1px;
 }
 
+/* Entra na hora (sem fade) para não haver instante sem cursor; o fade fica só na saída. */
 #crosshair.visible {
   opacity: 1;
+  transition: scale 0.15s ease;
 }
 
 #crosshair.active {
   scale: 1.35;
 }
 
-html.has-crosshair .clickable {
-  cursor: none;
+html.crosshair-on,
+html.crosshair-on * {
+  cursor: none !important;
 }
 
 /* ---------- Responsivo ---------- */
