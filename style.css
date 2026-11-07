@@ -1250,23 +1250,40 @@ html.js[data-motion="on"] .session.is-live {
 }
 
 /* ---------- Mira ---------- */
+/* O elemento externo só posiciona: é um ponto de 0x0 exatamente na ponta do ponteiro.
+   O desenho fica no filho, que pode crescer sem nunca mexer na posição. */
 #crosshair {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  will-change: transform;
+}
+
+/* Entra na hora (sem fade) para não haver instante sem cursor; o fade fica só na saída. */
+#crosshair.visible {
+  opacity: 1;
+  transition: none;
+}
+
+.crosshair-mark {
+  position: absolute;
   top: -10px;
   left: -10px;
   width: 20px;
   height: 20px;
   border: 1px solid var(--phosphor);
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 90;
-  opacity: 0;
-  transition: opacity 0.12s ease, scale 0.15s ease;
-  will-change: transform;
+  transition: scale 0.15s ease;
 }
 
-#crosshair::before,
-#crosshair::after {
+.crosshair-mark::before,
+.crosshair-mark::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1275,23 +1292,17 @@ html.js[data-motion="on"] .session.is-live {
   transform: translate(-50%, -50%);
 }
 
-#crosshair::before {
+.crosshair-mark::before {
   width: 1px;
   height: 32px;
 }
 
-#crosshair::after {
+.crosshair-mark::after {
   width: 32px;
   height: 1px;
 }
 
-/* Entra na hora (sem fade) para não haver instante sem cursor; o fade fica só na saída. */
-#crosshair.visible {
-  opacity: 1;
-  transition: scale 0.15s ease;
-}
-
-#crosshair.active {
+#crosshair.active .crosshair-mark {
   scale: 1.35;
 }
 
