@@ -41,7 +41,20 @@ A estrutura principal do repositório é composta por:
 * `index.html`: arquivo principal da página;
 * `style.css`: arquivo de estilos visuais e responsividade;
 * `script.js`: arquivo com comportamentos e interações da página;
+* `assets/`: favicon e imagem de compartilhamento em redes sociais;
+* `sitemap.xml`: mapa do site para enviar aos buscadores;
 * `README.md`: documentação principal do projeto.
+
+## Experiência do Site
+
+A interface funciona como uma sessão de terminal, com menu, conteúdo e shell em painéis ligados entre si:
+
+* **Abertura:** a chuva digital trava nas letras e forma o nome, que depois vira texto real;
+* **Terminal interativo:** simulado no navegador, sem enviar dados. Digite `help` para ver os comandos, como `ls`, `cat profile.txt`, `open cv`, `lang en`, `neofetch` e `nmap localhost`. Aceita autocompletar com Tab e histórico com as setas;
+* **Links diretos:** cada seção tem endereço próprio, como `#cv/skills` e `#repositories`;
+* **Tradução PT/EN:** o idioma escolhido fica salvo, e o terminal também é traduzido;
+* **Controle de animações:** o botão no cabeçalho (ou `rain off`) pausa todo o movimento, e `prefers-reduced-motion` é respeitado;
+* **Sem JavaScript:** todo o conteúdo continua acessível.
 
 ## Integração com GitHub
 
@@ -78,6 +91,7 @@ As principais medidas adotadas foram:
 * Não armazenar senhas, tokens ou chaves de API no repositório;
 * Manter o repositório público apenas com informações adequadas para divulgação;
 * Utilizar o GitHub Pages apenas para arquivos estáticos;
+* Aplicar uma Content Security Policy que só permite scripts do próprio site e estilos e fontes do Google Fonts;
 * Evitar exposição de dados pessoais sensíveis;
 * Centralizar o controle de alterações por meio de commits;
 * Manter a branch principal como versão estável do projeto.
@@ -127,7 +141,8 @@ Foram realizados testes básicos para garantir o funcionamento do PortfolioHUB, 
 * Verificação dos cards de projetos;
 * Revisão da responsividade em diferentes tamanhos de tela;
 * Conferência visual da identidade do site;
-* Validação da publicação pelo GitHub Pages.
+* Validação da publicação pelo GitHub Pages;
+* Testes automatizados com Playwright (navegação, tradução, terminal, responsividade de 320 a 1920 px) e auditoria de acessibilidade com axe-core.
 
 ## Uso do Google Gemini
 
@@ -161,8 +176,6 @@ Algumas melhorias planejadas para versões futuras incluem:
 * Melhorar a descrição individual dos projetos;
 * Adicionar certificações, cursos e laboratórios concluídos;
 * Criar uma seção específica sobre a implantação do PortfolioHUB;
-* Adicionar metatags para SEO;
-* Incluir favicon personalizado;
 * Publicar o link da apresentação final do projeto.
 
 ## Autor
