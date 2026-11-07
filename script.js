@@ -39,7 +39,7 @@
 
   /* ---------- Atlas de glifos: desenhar uma vez, copiar sempre ---------- */
   const GLYPHS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const RAIN_FONT = '"Martian Mono", "MS Gothic", "Yu Gothic", "Noto Sans Mono CJK JP", monospace';
+  const RAIN_FONT = '"VT323", "MS Gothic", "Yu Gothic", "Noto Sans Mono CJK JP", monospace';
 
   function createAtlas(cell, colors, scale = 1) {
     const size = Math.ceil(cell * scale);
@@ -48,7 +48,7 @@
     atlas.height = colors.length * size;
 
     const ctx = atlas.getContext("2d");
-    ctx.font = `500 ${Math.floor(size * 0.8)}px ${RAIN_FONT}`;
+    ctx.font = `400 ${Math.floor(size * 0.95)}px ${RAIN_FONT}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
@@ -271,7 +271,7 @@
       const style = window.getComputedStyle(span);
       fontSize = parseFloat(style.fontSize);
 
-      maskCtx.font = `${style.fontWeight} ${style.fontSize} "Martian Mono", monospace`;
+      maskCtx.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
       if ("letterSpacing" in maskCtx) {
         maskCtx.letterSpacing = style.letterSpacing;
       }
@@ -284,7 +284,7 @@
       maskCtx.fillText(span.textContent, rect.left - box.left, baseline);
     });
 
-    const cell = Math.max(5, Math.round(fontSize / 19));
+    const cell = Math.max(5, Math.round(fontSize / 26));
     const pixels = maskCtx.getImageData(0, 0, width, height).data;
     const columns = [];
     const rowCount = Math.ceil(height / cell);
