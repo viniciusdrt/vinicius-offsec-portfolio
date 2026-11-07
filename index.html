@@ -2,82 +2,130 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vinícius OffSec | Portfólio</title>
-
-  <link rel="stylesheet" href="style.css">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'"
   >
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Vinícius OffSec | Portfólio de Cibersegurança</title>
+  <meta
+    name="description"
+    content="Portfólio de Vinícius: estudante de Ciência da Computação e estagiário de NOC, com foco em segurança ofensiva, pentest web, análise de vulnerabilidades e automação."
+  >
+  <meta name="author" content="Vinícius">
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://viniciusdrt.github.io/vinicius-offsec-portfolio/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Vinícius OffSec">
+  <meta property="og:title" content="Vinícius OffSec | Portfólio de Cibersegurança">
+  <meta property="og:description" content="Segurança ofensiva, pentest web, análise de vulnerabilidades e automação, em um portfólio com terminal Linux interativo.">
+  <meta property="og:url" content="https://viniciusdrt.github.io/vinicius-offsec-portfolio/">
+  <meta property="og:image" content="https://viniciusdrt.github.io/vinicius-offsec-portfolio/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nome Vinícius OffSec em verde neon sobre chuva digital em fundo preto">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
     rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Martian+Mono:wght@400;500;700;800&display=swap"
   >
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vinícius",
+      "url": "https://viniciusdrt.github.io/vinicius-offsec-portfolio/",
+      "jobTitle": "Estagiário em Monitoramento de Redes (NOC)",
+      "worksFor": { "@type": "Organization", "name": "IPV7" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "UniCEUB" },
+      "knowsAbout": ["Segurança ofensiva", "Pentest web", "OWASP Top 10", "Linux", "Python", "Redes"],
+      "sameAs": [
+        "https://github.com/viniciusdrt",
+        "https://www.linkedin.com/in/viniciusdrt/"
+      ]
+    }
+  </script>
+
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <canvas id="matrix-canvas"></canvas>
-  <div id="crosshair"></div>
+  <a class="skip-link" href="#terminal-preview" data-i18n="skipLink">Pular para o conteúdo</a>
 
-  <div id="transition-overlay" aria-hidden="true">
-    <div class="transition-bg"></div>
-    <div class="transition-noise"></div>
-    <div class="transition-scanlines"></div>
-    <div class="transition-bars">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <h2>SYSTEM_RELOAD</h2>
-  </div>
+  <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+  <div id="crosshair" aria-hidden="true"></div>
 
-  <header>
-    <nav>
-      <span class="logo">Vinícius</span>
+  <header class="site-header">
+    <nav aria-label="Principal" data-i18n-aria="navLabel">
+      <a class="logo clickable" href="#hero" translate="no">Vinícius</a>
 
-      <div class="language-switcher header-language-switcher">
-        <button class="lang-btn active-lang clickable" data-lang="pt">PT</button>
-        <span class="lang-separator">|</span>
-        <button class="lang-btn clickable" data-lang="en">EN</button>
+      <div class="header-tools">
+        <button class="motion-toggle clickable" id="motion-toggle" type="button">
+          <svg class="icon icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z"/></svg>
+          <svg class="icon icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z"/></svg>
+          <span id="motion-toggle-label" class="motion-toggle-label">Pausar animações</span>
+        </button>
+
+        <div class="language-switcher header-language-switcher" role="group" aria-label="Idioma" data-i18n-aria="langLabel">
+          <button class="lang-btn active-lang clickable" data-lang="pt" type="button" aria-pressed="true" lang="pt-BR" aria-label="Português">PT</button>
+          <span class="lang-separator" aria-hidden="true">|</span>
+          <button class="lang-btn clickable" data-lang="en" type="button" aria-pressed="false" lang="en" aria-label="English">EN</button>
+        </div>
       </div>
     </nav>
   </header>
 
   <main>
-    <section id="hero">
+    <section id="hero" aria-labelledby="hero-title">
       <div class="hero-panel">
-        <div class="hero-left">
-          <p class="hero-tag" id="hero-tag-text">VULNERABILIDADE ENCONTRADA...</p>
+        <div class="hero-top">
+          <p class="hero-tag"><span id="hero-tag-text">VULNERABILIDADE ENCONTRADA…</span><span class="caret" aria-hidden="true"></span></p>
 
-          <h1 class="glitch-title">
+          <div class="hero-system-block" translate="no">
+            <p class="hero-system-info">SYSTEM_ID: V-SEC-01</p>
+            <p class="hero-system-info">KERNEL: 5.14.0-kali</p>
+          </div>
+        </div>
+
+        <div class="title-wrap">
+          <h1 class="glitch-title" id="hero-title" translate="no">
             <span class="name-white hologram-text" data-text="VINÍCIUS">VINÍCIUS</span>
             <span class="name-green hologram-text" data-text="OFFSEC">OFFSEC</span>
           </h1>
-
-          <div class="hero-line"></div>
-
-          <p class="hero-status" id="hero-status-text">Disponível para oportunidades</p>
+          <canvas id="title-rain" aria-hidden="true"></canvas>
         </div>
 
-        <div class="hero-right">
-          <div class="hero-top-right">
-            <div class="hero-system-block">
-              <p class="hero-system-info">SYSTEM_ID: V-SEC-01</p>
-              <p class="hero-system-info">KERNEL: 5.14.0-kali</p>
-            </div>
-          </div>
+        <div class="hero-foot">
+          <p class="hero-status"><span class="status-dot" aria-hidden="true"></span><span id="hero-status-text">Disponível para oportunidades</span></p>
 
           <div class="hero-socials">
+            <a class="hero-cta clickable" href="#terminal-preview">
+              <span class="hero-cta-prompt" aria-hidden="true">&gt;_</span>
+              <span data-i18n="heroCta">Abrir o terminal</span>
+            </a>
+
             <a
               href="https://github.com/viniciusdrt"
               target="_blank"
               rel="noopener noreferrer"
               class="social-box clickable"
+              translate="no"
             >
-              <i class="fa-brands fa-github"></i>
+              <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
               <span>GitHub</span>
             </a>
 
@@ -86,8 +134,9 @@
               target="_blank"
               rel="noopener noreferrer"
               class="social-box clickable"
+              translate="no"
             >
-              <i class="fa-brands fa-linkedin-in"></i>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
               <span>LinkedIn</span>
             </a>
           </div>
@@ -95,43 +144,59 @@
       </div>
     </section>
 
-    <section id="terminal-preview">
-      <div class="terminal-grid">
-        <aside class="side-panel">
+    <section id="terminal-preview" aria-label="Sessão do terminal" data-i18n-aria="sessionLabel">
+      <div class="terminal-grid session">
+        <div class="side-panel">
           <div class="panel-box menu-box">
-            <div class="panel-header">MENU_V2.0</div>
+            <div class="panel-header" translate="no">MENU_V2.0</div>
 
-            <button class="panel-link clickable main-tab active-link" data-main="root">ROOT_ACCESS</button>
-            <button class="panel-link clickable main-tab" data-main="cv">CV</button>
-            <button class="panel-link clickable main-tab" data-main="repositories">REPOSITORIES</button>
-            <button class="panel-link clickable main-tab" data-main="contact">CONTACT_UPLINK</button>
+            <div class="menu-list" role="tablist" aria-orientation="vertical" aria-label="Seções" data-i18n-aria="menuLabel" translate="no">
+              <button class="panel-link clickable main-tab active-link" id="tab-root" data-main="root" type="button" role="tab" aria-selected="true" aria-controls="main-root">ROOT_ACCESS</button>
+              <button class="panel-link clickable main-tab" id="tab-cv" data-main="cv" type="button" role="tab" aria-selected="false" aria-controls="main-cv" tabindex="-1">CV</button>
+              <button class="panel-link clickable main-tab" id="tab-repositories" data-main="repositories" type="button" role="tab" aria-selected="false" aria-controls="main-repositories" tabindex="-1">REPOSITORIES</button>
+              <button class="panel-link clickable main-tab" id="tab-contact" data-main="contact" type="button" role="tab" aria-selected="false" aria-controls="main-contact" tabindex="-1">CONTACT_UPLINK</button>
+            </div>
           </div>
 
           <div class="panel-box stats-box">
-            <div class="panel-header">SERVER_STATS</div>
-            <p>Visitors: 00000008</p>
-            <p>You are visitor: #06</p>
-            <p>Server time: 19:13 GMT</p>
-            <p>Status: ONLINE</p>
+            <div class="panel-header" translate="no">SESSION_STATS</div>
+            <dl class="stats-list">
+              <div><dt data-i18n="statStatus">Status</dt><dd id="stat-status" translate="no">ONLINE</dd></div>
+              <div><dt data-i18n="statClock">Hora local</dt><dd id="stat-clock">--:--:--</dd></div>
+              <div><dt data-i18n="statUptime">Sessão</dt><dd id="stat-uptime">00:00</dd></div>
+              <div><dt data-i18n="statCommands">Comandos</dt><dd id="stat-commands">0</dd></div>
+            </dl>
           </div>
-        </aside>
+        </div>
 
         <div class="terminal-area">
-          <div class="terminal-box main-terminal-box">
-            <div class="quote-header" id="terminal-exe-label">&gt;_ EXECUTING_ROOT.EXE</div>
+          <div class="terminal-box main-terminal-box" id="main-terminal-box">
+            <div class="quote-header" id="terminal-exe-label" translate="no">&gt;_ EXECUTING_ROOT.EXE</div>
+
+            <div id="transition-overlay" aria-hidden="true">
+              <div class="transition-bg"></div>
+              <div class="transition-noise"></div>
+              <div class="transition-scanlines"></div>
+              <div class="transition-bars">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="transition-label" translate="no">SYSTEM_RELOAD</div>
+            </div>
 
             <div class="terminal-main-layout cv-closed">
-              <div class="terminal-submenu hidden" id="cv-submenu">
-                <button class="submenu-item clickable active-submenu cv-tab" data-cv="profile">PROFILE</button>
-                <button class="submenu-item clickable cv-tab" data-cv="skills">SKILLS</button>
-                <button class="submenu-item clickable cv-tab" data-cv="arsenal">ARSENAL</button>
-                <button class="submenu-item clickable cv-tab" data-cv="experience">EXPERIENCE</button>
-                <button class="submenu-item clickable cv-tab" data-cv="academic">ACADEMIC</button>
+              <div class="terminal-submenu hidden" id="cv-submenu" role="tablist" aria-label="Currículo" data-i18n-aria="cvLabel" translate="no">
+                <button class="submenu-item clickable active-submenu cv-tab" id="tab-cv-profile" data-cv="profile" type="button" role="tab" aria-selected="true" aria-controls="cv-profile">PROFILE</button>
+                <button class="submenu-item clickable cv-tab" id="tab-cv-skills" data-cv="skills" type="button" role="tab" aria-selected="false" aria-controls="cv-skills" tabindex="-1">SKILLS</button>
+                <button class="submenu-item clickable cv-tab" id="tab-cv-arsenal" data-cv="arsenal" type="button" role="tab" aria-selected="false" aria-controls="cv-arsenal" tabindex="-1">ARSENAL</button>
+                <button class="submenu-item clickable cv-tab" id="tab-cv-experience" data-cv="experience" type="button" role="tab" aria-selected="false" aria-controls="cv-experience" tabindex="-1">EXPERIENCE</button>
+                <button class="submenu-item clickable cv-tab" id="tab-cv-academic" data-cv="academic" type="button" role="tab" aria-selected="false" aria-controls="cv-academic" tabindex="-1">ACADEMIC</button>
               </div>
 
               <div class="terminal-main-content">
-                <div class="main-content-section active-content" id="main-root">
-                  <h3 class="content-title" id="root-title">ROOT_ACCESS</h3>
+                <div class="main-content-section active-content" id="main-root" role="tabpanel" aria-labelledby="tab-root" tabindex="0">
+                  <h2 class="content-title" id="root-title" translate="no">ROOT_ACCESS</h2>
 
                   <div class="content-box">
                     <p id="root-text-1">
@@ -141,15 +206,16 @@
                     </p>
 
                     <p id="root-text-2">
-                      Meu foco está em segurança ofensiva, pentest web, automação
-                      e evolução prática constante na área de cibersegurança.
+                      Atuo com monitoramento de redes e infraestrutura em NOC e continuo
+                      me desenvolvendo em segurança ofensiva, análise de vulnerabilidades
+                      e automação.
                     </p>
                   </div>
                 </div>
 
-                <div class="main-content-section" id="main-cv">
-                  <div class="cv-content-section active-content" id="cv-profile">
-                    <h3 class="content-title" id="cv-profile-title">PROFESSIONAL_SUMMARY</h3>
+                <div class="main-content-section" id="main-cv" role="tabpanel" aria-labelledby="tab-cv" tabindex="0">
+                  <div class="cv-content-section active-content" id="cv-profile" role="tabpanel" aria-labelledby="tab-cv-profile">
+                    <h2 class="content-title" id="cv-profile-title" translate="no">PROFESSIONAL_SUMMARY</h2>
 
                     <div class="content-box">
                       <p id="cv-profile-text-1">
@@ -165,88 +231,64 @@
                     </div>
                   </div>
 
-                  <div class="cv-content-section" id="cv-skills">
-                    <h3 class="content-title" id="cv-skills-title">TECHNICAL_CAPABILITIES</h3>
+                  <div class="cv-content-section" id="cv-skills" role="tabpanel" aria-labelledby="tab-cv-skills">
+                    <h2 class="content-title" id="cv-skills-title" translate="no">TECHNICAL_CAPABILITIES</h2>
 
-                    <div class="skills-grid-terminal">
-                      <div class="skill-card" id="skill-1">Linux</div>
-                      <div class="skill-card" id="skill-2">Python</div>
-                      <div class="skill-card" id="skill-3">Java</div>
-                      <div class="skill-card" id="skill-4">Burp Suite</div>
-                      <div class="skill-card" id="skill-5">Nmap</div>
-                      <div class="skill-card" id="skill-6">Nuclei</div>
-                      <div class="skill-card" id="skill-7">OWASP Top 10</div>
-                      <div class="skill-card" id="skill-8">Redes</div>
-                      <div class="skill-card" id="skill-9">Git/GitHub</div>
-                      <div class="skill-card" id="skill-10">Zabbix</div>
-                      <div class="skill-card" id="skill-11">Grafana</div>
-                      <div class="skill-card" id="skill-12">Wazuh</div>
-                    </div>
+                    <ul class="skills-grid-terminal">
+                      <li class="skill-card" id="skill-1" translate="no">Linux</li>
+                      <li class="skill-card" id="skill-2" translate="no">Python</li>
+                      <li class="skill-card" id="skill-3" translate="no">Java</li>
+                      <li class="skill-card" id="skill-4" translate="no">Burp Suite</li>
+                      <li class="skill-card" id="skill-5" translate="no">Nmap</li>
+                      <li class="skill-card" id="skill-6" translate="no">Nuclei</li>
+                      <li class="skill-card" id="skill-7" translate="no">OWASP Top 10</li>
+                      <li class="skill-card" id="skill-8">Redes</li>
+                      <li class="skill-card" id="skill-9" translate="no">Git/GitHub</li>
+                      <li class="skill-card" id="skill-10" translate="no">Zabbix</li>
+                      <li class="skill-card" id="skill-11" translate="no">Grafana</li>
+                      <li class="skill-card" id="skill-12" translate="no">Wazuh</li>
+                    </ul>
                   </div>
 
-                  <div class="cv-content-section" id="cv-arsenal">
-                    <h3 class="content-title" id="cv-arsenal-title">CYBER_SECURITY_ARSENAL</h3>
+                  <div class="cv-content-section" id="cv-arsenal" role="tabpanel" aria-labelledby="tab-cv-arsenal">
+                    <h2 class="content-title" id="cv-arsenal-title" translate="no">CYBER_SECURITY_ARSENAL</h2>
 
-                    <div class="skills-grid-terminal">
-                      <div class="skill-card">Burp Suite</div>
-                      <div class="skill-card">Nmap</div>
-                      <div class="skill-card">Nuclei</div>
-                      <div class="skill-card">Wireshark</div>
-                      <div class="skill-card">Gobuster</div>
-                      <div class="skill-card">ffuf</div>
-                      <div class="skill-card">Linux CLI</div>
-                    </div>
+                    <ul class="skills-grid-terminal" translate="no">
+                      <li class="skill-card">Burp Suite</li>
+                      <li class="skill-card">Nmap</li>
+                      <li class="skill-card">Nuclei</li>
+                      <li class="skill-card">Wireshark</li>
+                      <li class="skill-card">Gobuster</li>
+                      <li class="skill-card">ffuf</li>
+                      <li class="skill-card">Linux CLI</li>
+                    </ul>
                   </div>
-                  <div class="cv-content-section" id="cv-experience">
-                    <h3 class="content-title" id="cv-experience-title">WORK_HISTORY</h3>
+
+                  <div class="cv-content-section" id="cv-experience" role="tabpanel" aria-labelledby="tab-cv-experience">
+                    <h2 class="content-title" id="cv-experience-title" translate="no">WORK_HISTORY</h2>
 
                     <div class="content-box experience-box">
-
                       <div class="experience-header">
                         <div>
-                          <h4 id="cv-experience-role">
-                            Estagiário em Monitoramento de Redes (NOC)
-                          </h4>
-
-                          <span id="cv-experience-company">
-                            IPV7
-                          </span>
+                          <h3 id="cv-experience-role">Estagiário em Monitoramento de Redes (NOC)</h3>
+                          <span id="cv-experience-company" translate="no">IPV7</span>
                         </div>
 
-                        <span class="experience-date" id="cv-experience-date">
-                          JUN 2026 — ATUAL
-                        </span>
+                        <span class="experience-date" id="cv-experience-date">JUN 2026 — ATUAL</span>
                       </div>
 
                       <ul class="experience-list" id="cv-experience-list">
-                        <li>
-                          Monitoramento de equipamentos e serviços de rede, incluindo
-                          roteadores, switches, OLTs e servidores.
-                        </li>
-
-                        <li>
-                          Identificação e triagem de alarmes e incidentes de infraestrutura.
-                        </li>
-
-                        <li>
-                          Testes de conectividade e troubleshooting inicial utilizando
-                          ping e traceroute.
-                        </li>
-
-                        <li>
-                          Registro e acompanhamento de chamados operacionais.
-                        </li>
-
-                        <li>
-                          Apoio às rotinas técnicas do NOC e colaboração com o time
-                          de infraestrutura.
-                        </li>
+                        <li>Monitoramento de equipamentos e serviços de rede, incluindo roteadores, switches, OLTs e servidores.</li>
+                        <li>Identificação e triagem de alarmes e incidentes de infraestrutura.</li>
+                        <li>Testes de conectividade e troubleshooting inicial utilizando ping e traceroute.</li>
+                        <li>Registro e acompanhamento de chamados operacionais.</li>
+                        <li>Apoio às rotinas técnicas do NOC e colaboração com o time de infraestrutura.</li>
                       </ul>
-
                     </div>
                   </div>
-                  <div class="cv-content-section" id="cv-academic">
-                    <h3 class="content-title" id="cv-academic-title">EDUCATION</h3>
+
+                  <div class="cv-content-section" id="cv-academic" role="tabpanel" aria-labelledby="tab-cv-academic">
+                    <h2 class="content-title" id="cv-academic-title" translate="no">EDUCATION</h2>
 
                     <div class="content-box">
                       <p id="cv-academic-text-1">Ciência da Computação — UniCEUB</p>
@@ -255,78 +297,52 @@
                   </div>
                 </div>
 
-                <div class="main-content-section" id="main-repositories">
-                  <h3 class="content-title" id="repositories-title">PROJECT_REPOSITORIES</h3>
+                <div class="main-content-section" id="main-repositories" role="tabpanel" aria-labelledby="tab-repositories" tabindex="0">
+                  <h2 class="content-title" id="repositories-title" translate="no">PROJECT_REPOSITORIES</h2>
 
                   <div class="projects-grid-terminal">
-                    <a
-                      href="https://github.com/viniciusdrt/java"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-terminal-card clickable"
-                    >
-                      <h4 id="repo-java-title">Estudos Java</h4>
+                    <a href="https://github.com/viniciusdrt/java" target="_blank" rel="noopener noreferrer" class="project-terminal-card clickable">
+                      <h3 id="repo-java-title">Estudos Java</h3>
                       <p id="repo-java-text">POO, sintaxe, lógica e fundamentos backend.</p>
+                      <span class="card-path" translate="no">viniciusdrt/java<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h10v10h-2V5.4L3.4 14 2 12.6 10.6 4H4z"/></svg></span>
                     </a>
 
-                    <a
-                      href="https://github.com/viniciusdrt/python"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-terminal-card clickable"
-                    >
-                      <h4 id="repo-python-title">Estudos Python</h4>
+                    <a href="https://github.com/viniciusdrt/python" target="_blank" rel="noopener noreferrer" class="project-terminal-card clickable">
+                      <h3 id="repo-python-title">Estudos Python</h3>
                       <p id="repo-python-text">Lógica, automação e base para ferramentas de segurança.</p>
+                      <span class="card-path" translate="no">viniciusdrt/python<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h10v10h-2V5.4L3.4 14 2 12.6 10.6 4H4z"/></svg></span>
                     </a>
 
-                    <a
-                      href="https://github.com/viniciusdrt/camscan"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-terminal-card clickable"
-                    >
-                      <h4 id="repo-camscan-title">camScan</h4>
+                    <a href="https://github.com/viniciusdrt/camscan" target="_blank" rel="noopener noreferrer" class="project-terminal-card clickable">
+                      <h3 id="repo-camscan-title" translate="no">camscan</h3>
                       <p id="repo-camscan-text">Scanner automatizado de vulnerabilidades em câmeras IP de redes locais.</p>
+                      <span class="card-path" translate="no">viniciusdrt/camscan<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h10v10h-2V5.4L3.4 14 2 12.6 10.6 4H4z"/></svg></span>
                     </a>
 
-                    <a
-                      href="https://github.com/viniciusdrt/malware-detection-tool"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-terminal-card clickable"
-                    >
-                      <h4 id="repo-malware-title">malware-detection-tool</h4>
+                    <a href="https://github.com/viniciusdrt/malware-detection-tool" target="_blank" rel="noopener noreferrer" class="project-terminal-card clickable">
+                      <h3 id="repo-malware-title" translate="no">malware-detection-tool</h3>
                       <p id="repo-malware-text">Projeto no GitHub para detecção de malware.</p>
+                      <span class="card-path" translate="no">viniciusdrt/malware-detection-tool<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h10v10h-2V5.4L3.4 14 2 12.6 10.6 4H4z"/></svg></span>
                     </a>
                   </div>
                 </div>
 
-                <div class="main-content-section" id="main-contact">
-                  <h3 class="content-title" id="contact-title">SECURE_COMMUNICATION_UPLINK</h3>
+                <div class="main-content-section" id="main-contact" role="tabpanel" aria-labelledby="tab-contact" tabindex="0">
+                  <h2 class="content-title" id="contact-title" translate="no">SECURE_COMMUNICATION_UPLINK</h2>
 
-                  <div class="contact-grid-terminal">
+                  <div class="contact-grid-terminal" translate="no">
                     <a href="mailto:eu.viniasduarte@gmail.com" class="contact-card clickable">
-                      <h4 id="contact-email-title">EMAIL_RELAY</h4>
+                      <h3 id="contact-email-title">EMAIL_RELAY</h3>
                       <p>eu.viniasduarte@gmail.com</p>
                     </a>
 
-                    <a
-                      href="https://github.com/viniciusdrt"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="contact-card clickable"
-                    >
-                      <h4>GITHUB</h4>
+                    <a href="https://github.com/viniciusdrt" target="_blank" rel="noopener noreferrer" class="contact-card clickable">
+                      <h3>GITHUB</h3>
                       <p>github.com/viniciusdrt</p>
                     </a>
 
-                    <a
-                      href="https://www.linkedin.com/in/viniciusdrt/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="contact-card clickable"
-                    >
-                      <h4>LINKEDIN</h4>
+                    <a href="https://www.linkedin.com/in/viniciusdrt/" target="_blank" rel="noopener noreferrer" class="contact-card clickable">
+                      <h3>LINKEDIN</h3>
                       <p>linkedin.com/in/viniciusdrt</p>
                     </a>
                   </div>
@@ -335,11 +351,64 @@
             </div>
           </div>
         </div>
+
+        <div class="shell-pane" id="shell">
+          <div class="quote-header shell-header">
+            <span id="shell-title" translate="no">vinicius@offsec: ~</span>
+            <span class="shell-hint" data-i18n="shellLocal">sessão local, nada é enviado</span>
+          </div>
+
+          <div
+            class="shell-output"
+            id="shell-output"
+            role="log"
+            aria-live="polite"
+            aria-label="Saída do terminal"
+            data-i18n-aria="shellOutputLabel"
+            tabindex="0"
+          ></div>
+
+          <div class="shell-suggestions" id="shell-suggestions" translate="no">
+            <button class="shell-chip clickable" type="button" data-cmd="help">help</button>
+            <button class="shell-chip clickable" type="button" data-cmd="whoami">whoami</button>
+            <button class="shell-chip clickable" type="button" data-cmd="ls">ls</button>
+            <button class="shell-chip clickable" type="button" data-cmd="neofetch">neofetch</button>
+            <button class="shell-chip clickable" type="button" data-cmd="open cv">open cv</button>
+          </div>
+
+          <form class="shell-form" id="shell-form" autocomplete="off">
+            <label class="shell-prompt" for="shell-input" translate="no">
+              <span class="visually-hidden" data-i18n="shellInputLabel">Comando do terminal</span>
+              <span id="shell-prompt-text" aria-hidden="true">vinicius@offsec:~$</span>
+            </label>
+            <input
+              class="shell-input"
+              id="shell-input"
+              name="command"
+              type="text"
+              autocomplete="off"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              enterkeyhint="send"
+              translate="no"
+              placeholder="help…"
+            >
+          </form>
+        </div>
+
+        <div class="status-bar" aria-hidden="true" translate="no">
+          <span class="status-session">[offsec]</span>
+          <span class="status-windows" id="status-windows">0:root*</span>
+          <span class="status-clock" id="status-clock"></span>
+        </div>
       </div>
     </section>
-
   </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <p><span translate="no">Vinícius OffSec</span>, <span id="footer-year">2026</span></p>
+    <a class="clickable" href="https://github.com/viniciusdrt/vinicius-offsec-portfolio" target="_blank" rel="noopener noreferrer" data-i18n="footerSource">Código-fonte no GitHub</a>
+  </footer>
 </body>
 </html>
